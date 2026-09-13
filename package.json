@@ -1,0 +1,14 @@
+{
+  "name": "xoshnaw-market",
+  "version": "1.0.0",
+  "description": "XOSHNAW MARKET Android App",
+  "private": true,
+  "scripts": {
+    "build": "echo XOSHNAW MARKET"
+  },
+  "dependencies": {
+    "@capacitor/core": "^7.4.3",
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/cli": "^7.4.3"
+  }
+}
