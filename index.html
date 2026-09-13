@@ -136,18 +136,8 @@ button{
   display:flex;
   align-items:center;
   justify-content:center;
+  font-size:70px;
   background:#e5e7eb;
-  overflow:hidden;
-}
-
-.productImg img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.noImage{
-  font-size:60px;
 }
 
 .cardBody{
@@ -171,12 +161,6 @@ button{
   color:white;
 }
 
-.buyBtn{
-  width:100%;
-  background:#2563eb;
-  color:white;
-}
-
 .liveCard{
   background:#111827;
   color:white;
@@ -192,12 +176,6 @@ button{
   font-size:60px;
 }
 
-.liveScreen iframe{
-  width:100%;
-  height:100%;
-  border:0;
-}
-
 .liveBadge{
   position:absolute;
   top:12px;
@@ -207,7 +185,16 @@ button{
   padding:6px 10px;
   border-radius:20px;
   font-size:13px;
-  z-index:5;
+}
+
+.viewers{
+  position:absolute;
+  top:12px;
+  left:12px;
+  background:#0009;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:13px;
 }
 
 .liveBody{
@@ -221,16 +208,11 @@ button{
 }
 
 .formBox{
-  max-width:600px;
+  max-width:450px;
   margin:20px auto;
   background:white;
   padding:22px;
   border-radius:18px;
-  box-shadow:0 3px 15px #0001;
-}
-
-.formBox h2{
-  margin-bottom:18px;
 }
 
 input,select,textarea{
@@ -246,12 +228,6 @@ input,select,textarea{
 textarea{
   min-height:100px;
   resize:vertical;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-  border-color:#111827;
 }
 
 .submit{
@@ -316,6 +292,8 @@ textarea:focus{
   border-radius:18px;
   padding:22px;
   position:relative;
+  max-height:90vh;
+  overflow:auto;
 }
 
 .close{
@@ -336,53 +314,24 @@ textarea:focus{
 }
 
 .adminPanel{
-  margin-top:20px;
   background:white;
   padding:20px;
   border-radius:18px;
-  border:2px solid #facc15;
+  margin-top:20px;
 }
 
 .adminPanel h2{
   margin-bottom:15px;
 }
 
-.adminTitle{
+.adminBtn{
   background:#111827;
   color:white;
-  padding:12px;
-  border-radius:10px;
-  margin:20px 0 12px;
+  margin:4px;
 }
 
-.adminList{
-  display:grid;
-  gap:10px;
-}
-
-.adminItem{
-  background:#f3f4f6;
-  padding:12px;
-  border-radius:10px;
-}
-
-.adminItem button{
-  margin-top:8px;
-  margin-left:5px;
-}
-
-.deleteBtn{
+.dangerBtn{
   background:#ef4444;
-  color:white;
-}
-
-.editBtn{
-  background:#2563eb;
-  color:white;
-}
-
-.roleBtn{
-  background:#16a34a;
   color:white;
 }
 
@@ -399,11 +348,10 @@ footer{
 }
 
 .hidden{
-  display:none !important;
+  display:none!important;
 }
 
 @media(max-width:600px){
-
   .hero h1{
     font-size:24px;
   }
@@ -415,7 +363,6 @@ footer{
   .productImg{
     height:150px;
   }
-
 }
 </style>
 </head>
@@ -424,85 +371,60 @@ footer{
 
 <header>
   <div class="header">
-
-    <div class="logo">
-      XOSHNAW MARKET
-    </div>
+    <div class="logo">XOSHNAW MARKET</div>
 
     <div class="userBox">
+      <span id="userName">میوان</span>
 
-      <span id="userName">
-        میوان
-      </span>
-
-      <button
-        id="loginButton"
-        class="loginBtn"
-        onclick="openLogin()">
+      <button id="loginButton"
+              class="loginBtn"
+              onclick="openLogin()">
         چوونەژوورەوە
       </button>
 
-      <button
-        id="logoutButton"
-        class="logoutBtn"
-        onclick="logout()"
-        style="display:none">
+      <button id="logoutButton"
+              class="logoutBtn"
+              onclick="logout()"
+              style="display:none">
         دەرچوون
       </button>
-
     </div>
-
   </div>
 </header>
-
 
 <main class="container">
 
   <div class="hero">
-
-    <h1>
-      بەخێربێیت بۆ XOSHNAW MARKET
-    </h1>
-
-    <p>
-      بازاڕ، مزایدە و Live ـی XOSHNAW MARKET
-    </p>
-
+    <h1>بەخێربێیت بۆ XOSHNAW MARKET</h1>
+    <p>بازاڕ، مزایدە و Live ـی XOSHNAW MARKET</p>
   </div>
-
 
   <div class="nav">
 
-    <button
-      class="active"
-      onclick="showSection('home',this)">
+    <button class="active"
+            onclick="showSection('home',this)">
       🏠 سەرەکی
     </button>
 
-    <button
-      onclick="showSection('market',this)">
+    <button onclick="showSection('market',this)">
       🛒 بازاڕ
     </button>
 
-    <button
-      onclick="showSection('live',this)">
+    <button onclick="showSection('live',this)">
       🔴 Live
     </button>
 
-    <button
-      onclick="showSection('auction',this)">
+    <button onclick="showSection('auction',this)">
       🔨 مزایدە
     </button>
 
-    <button
-      onclick="showSection('account',this)">
+    <button onclick="showSection('account',this)">
       👤 هەژمار
     </button>
 
-    <button
-      id="adminNav"
-      class="hidden"
-      onclick="showSection('admin',this)">
+    <button id="adminNav"
+            class="hidden"
+            onclick="showSection('admin',this)">
       ⚙️ بەڕێوەبردن
     </button>
 
@@ -517,17 +439,7 @@ footer{
       🔥 بەشە چالاکەکان
     </h2>
 
-    <div
-      id="homeProducts"
-      class="grid">
-    </div>
-
-    <div
-      id="homeEmpty"
-      class="empty"
-      style="display:none">
-      هیچ بەرهەمێک نییە.
-    </div>
+    <div id="homeGrid" class="grid"></div>
 
   </section>
 
@@ -540,16 +452,11 @@ footer{
       🛒 بازاڕ
     </h2>
 
-    <div
-      id="marketProducts"
-      class="grid">
-    </div>
+    <div id="marketGrid" class="grid"></div>
 
-    <div
-      id="marketEmpty"
-      class="empty"
-      style="display:none">
-      هێشتا هیچ بەرهەمێک دانەنراوە.
+    <div id="marketEmpty"
+         class="empty">
+      هیچ کاڵایەک لە بازاڕدا نییە.
     </div>
 
   </section>
@@ -563,16 +470,11 @@ footer{
       🔴 Live
     </h2>
 
-    <div
-      id="liveList"
-      class="grid">
-    </div>
+    <div id="liveGrid" class="grid"></div>
 
-    <div
-      id="liveEmpty"
-      class="empty"
-      style="display:none">
-      ئێستا هیچ Live ـێک نییە.
+    <div id="liveEmpty"
+         class="empty">
+      ئێستا هیچ Live ـێک چالاک نییە.
     </div>
 
   </section>
@@ -586,16 +488,11 @@ footer{
       🔨 مزایدە
     </h2>
 
-    <div
-      id="auctionList"
-      class="grid">
-    </div>
+    <div id="auctionGrid" class="grid"></div>
 
-    <div
-      id="auctionEmpty"
-      class="empty"
-      style="display:none">
-      هێشتا هیچ مزایدەیەک نییە.
+    <div id="auctionEmpty"
+         class="empty">
+      ئێستا هیچ مزایدەیەک نییە.
     </div>
 
   </section>
@@ -605,49 +502,40 @@ footer{
 
   <section id="account" class="section">
 
-    <div
-      id="accountGuest"
-      class="empty">
+    <div id="accountGuest"
+         class="empty">
 
-      <h2>
-        👤 هەژمار
-      </h2>
+      <h2>👤 هەژمار</h2>
 
       <p style="margin:12px 0">
-        بۆ بەکارهێنانی هەموو تایبەتمەندییەکان هەژمار دروست بکە.
+        بۆ بەکارهێنانی هەموو تایبەتمەندییەکان
+        هەژمار دروست بکە.
       </p>
 
-      <button
-        class="loginBtn"
-        onclick="openLogin()">
+      <button class="loginBtn"
+              onclick="openLogin()">
         دروستکردنی هەژمار
       </button>
 
     </div>
 
 
-    <div
-      id="accountUser"
-      class="account"
-      style="display:none">
+    <div id="accountUser"
+         class="account"
+         style="display:none">
 
-      <h2>
-        👤 هەژماری من
-      </h2>
+      <h2>👤 هەژماری من</h2>
 
-      <h3
-        id="accountName"
-        style="margin-top:15px">
+      <h3 id="accountName"
+          style="margin-top:15px">
       </h3>
 
-      <p
-        id="accountEmail"
-        style="margin-top:6px;color:#6b7280">
+      <p id="accountEmail"
+         style="margin-top:6px;color:#6b7280">
       </p>
 
-      <p
-        id="accountRole"
-        style="margin-top:8px;font-weight:bold">
+      <p id="accountRole"
+         style="margin-top:8px;font-weight:bold">
       </p>
 
       <div class="stats">
@@ -676,224 +564,62 @@ footer{
 
   <!-- ADMIN -->
 
-  <section
-    id="admin"
-    class="section">
+  <section id="admin"
+           class="section">
 
     <div class="adminPanel">
 
-      <h2>
-        ⚙️ بەڕێوەبردنی XOSHNAW MARKET
-      </h2>
+      <h2>⚙️ بەڕێوەبردنی XOSHNAW MARKET</h2>
 
-      <p id="adminWelcome"></p>
+      <p id="adminRoleText"
+         style="margin-bottom:15px">
+      </p>
 
 
-      <!-- PRODUCT -->
+      <!-- ADD PRODUCT -->
 
-      <div class="adminTitle">
-        🛒 زیادکردن / دەستکاریکردنی بەرهەم
-      </div>
-
-      <input
-        id="productId"
-        type="hidden">
-
-      <input
-        id="productName"
-        type="text"
-        placeholder="ناوی بەرهەم">
-
-      <textarea
-        id="productDescription"
-        placeholder="وەسفی بەرهەم">
-      </textarea>
-
-      <select id="productCondition">
-
-        <option value="نوێ">
-          نوێ
-        </option>
-
-        <option value="بەکارهاتوو">
-          بەکارهاتوو
-        </option>
-
-      </select>
-
-      <input
-        id="productProvince"
-        type="text"
-        placeholder="پارێزگا / شار">
-
-      <input
-        id="productPrice"
-        type="number"
-        placeholder="نرخ">
-
-      <input
-        id="productImage"
-        type="url"
-        placeholder="لینکی وێنە">
-
-      <button
-        class="submit"
-        onclick="saveProduct()">
-        💾 پاشەکەوتکردنی بەرهەم
+      <button class="adminBtn"
+              onclick="openProductModal()">
+        ➕ زیادکردنی کاڵا
       </button>
 
 
-      <!-- AUCTION -->
+      <!-- ADD AUCTION -->
 
-      <div class="adminTitle">
-        🔨 زیادکردن / دەستکاریکردنی مزایدە
-      </div>
-
-      <input
-        id="auctionId"
-        type="hidden">
-
-      <input
-        id="auctionName"
-        type="text"
-        placeholder="ناوی بەرهەم">
-
-      <textarea
-        id="auctionDescription"
-        placeholder="وەسفی بەرهەم">
-      </textarea>
-
-      <select id="auctionCondition">
-
-        <option value="نوێ">
-          نوێ
-        </option>
-
-        <option value="بەکارهاتوو">
-          بەکارهاتوو
-        </option>
-
-      </select>
-
-      <input
-        id="auctionProvince"
-        type="text"
-        placeholder="پارێزگا / شار">
-
-      <input
-        id="auctionImage"
-        type="url"
-        placeholder="لینکی وێنە">
-
-      <input
-        id="auctionStartingPrice"
-        type="number"
-        placeholder="نرخی دەستپێک">
-
-      <label>
-        کاتی دەستپێکردن
-      </label>
-
-      <input
-        id="auctionStart"
-        type="datetime-local">
-
-      <label>
-        کاتی کۆتایی
-      </label>
-
-      <input
-        id="auctionEnd"
-        type="datetime-local">
-
-      <button
-        class="submit"
-        onclick="saveAuction()">
-        💾 پاشەکەوتکردنی مزایدە
+      <button class="adminBtn"
+              onclick="openAuctionModal()">
+        🔨 دروستکردنی مزایدە
       </button>
 
 
-      <!-- LIVE -->
+      <!-- ADD LIVE -->
 
-      <div class="adminTitle">
-        🔴 زیادکردن / دەستکاریکردنی Live
-      </div>
-
-      <input
-        id="liveId"
-        type="hidden">
-
-      <input
-        id="liveTitle"
-        type="text"
-        placeholder="ناوی Live">
-
-      <textarea
-        id="liveDescription"
-        placeholder="وەسفی Live">
-      </textarea>
-
-      <input
-        id="liveUrl"
-        type="url"
-        placeholder="لینکی Live">
-
-      <button
-        class="submit"
-        onclick="saveLive()">
-        🔴 پاشەکەوتکردنی Live
+      <button class="adminBtn"
+              onclick="openLiveModal()">
+        🔴 دروستکردنی Live
       </button>
 
 
-      <!-- PRODUCTS LIST -->
+      <div id="superAdminTools"
+           class="hidden"
+           style="margin-top:20px">
 
-      <div class="adminTitle">
-        📦 بەرهەمەکان
-      </div>
+        <hr style="margin-bottom:15px">
 
-      <div
-        id="adminProducts"
-        class="adminList">
-      </div>
+        <h3>👑 Super Admin</h3>
 
+        <button class="adminBtn"
+                onclick="openAdminModal()">
+          👨‍💼 زیادکردنی Admin
+        </button>
 
-      <!-- AUCTIONS LIST -->
+        <button class="adminBtn"
+                onclick="loadUsers()">
+          👥 بینینی بەکارهێنەران
+        </button>
 
-      <div class="adminTitle">
-        🔨 مزایدەکان
-      </div>
-
-      <div
-        id="adminAuctions"
-        class="adminList">
-      </div>
-
-
-      <!-- LIVE LIST -->
-
-      <div class="adminTitle">
-        🔴 Live ـەکان
-      </div>
-
-      <div
-        id="adminLives"
-        class="adminList">
-      </div>
-
-
-      <!-- SUPER ADMIN USERS -->
-
-      <div
-        id="superAdminArea"
-        class="hidden">
-
-        <div class="adminTitle">
-          👥 بەڕێوەبردنی بەکارهێنەران
-        </div>
-
-        <div
-          id="adminUsers"
-          class="adminList">
+        <div id="usersList"
+             style="margin-top:15px">
         </div>
 
       </div>
@@ -910,17 +636,15 @@ footer{
 </footer>
 
 
-<!-- LOGIN -->
+<!-- AUTH MODAL -->
 
-<div
-  id="authModal"
-  class="modal">
+<div id="authModal"
+     class="modal">
 
   <div class="modalBox">
 
-    <button
-      class="close"
-      onclick="closeLogin()">
+    <button class="close"
+            onclick="closeLogin()">
       ×
     </button>
 
@@ -928,45 +652,35 @@ footer{
       دروستکردنی هەژمار
     </h2>
 
-    <div
-      id="notice"
-      class="notice">
+    <div id="notice"
+         class="notice">
     </div>
 
-    <input
-      id="nameInput"
-      type="text"
-      placeholder="ناوی تەواو">
+    <input id="nameInput"
+           type="text"
+           placeholder="ناوی تەواو">
 
-    <input
-      id="emailInput"
-      type="email"
-      placeholder="ئیمەیڵ">
+    <input id="emailInput"
+           type="email"
+           placeholder="ئیمەیڵ">
 
-    <input
-      id="passwordInput"
-      type="password"
-      placeholder="وشەی نهێنی">
+    <input id="passwordInput"
+           type="password"
+           placeholder="وشەی نهێنی">
 
-    <button
-      id="authSubmit"
-      class="submit"
-      onclick="register()">
+    <button id="authSubmit"
+            class="submit"
+            onclick="register()">
       دروستکردنی هەژمار
     </button>
 
     <p style="text-align:center;margin-top:15px">
 
-      <span id="authSwitchText">
-        هەژمارت هەیە؟
-      </span>
+      هەژمارت هەیە؟
 
-      <button
-        onclick="showLoginMode()"
-        style="padding:4px;background:none;color:#2563eb">
-
+      <button onclick="showLoginMode()"
+              style="padding:4px;background:none;color:#2563eb">
         چوونەژوورەوە
-
       </button>
 
     </p>
@@ -976,9 +690,163 @@ footer{
 </div>
 
 
-<script type="module">
+<!-- PRODUCT MODAL -->
 
-/* FIREBASE */
+<div id="productModal"
+     class="modal">
+
+  <div class="modalBox">
+
+    <button class="close"
+            onclick="closeModal('productModal')">
+      ×
+    </button>
+
+    <h2>➕ زیادکردنی کاڵا</h2>
+
+    <input id="productName"
+           placeholder="ناوی کاڵا">
+
+    <textarea id="productDescription"
+              placeholder="وەسفی کاڵا">
+    </textarea>
+
+    <select id="productCondition">
+      <option value="نوێ">نوێ</option>
+      <option value="بەکارهاتوو">بەکارهاتوو</option>
+    </select>
+
+    <input id="productProvince"
+           placeholder="پارێزگا">
+
+    <input id="productPrice"
+           type="number"
+           placeholder="نرخ">
+
+    <input id="productImage"
+           placeholder="لینکی وێنە">
+
+    <button class="submit"
+            onclick="addProduct()">
+      زیادکردن
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- AUCTION MODAL -->
+
+<div id="auctionModal"
+     class="modal">
+
+  <div class="modalBox">
+
+    <button class="close"
+            onclick="closeModal('auctionModal')">
+      ×
+    </button>
+
+    <h2>🔨 دروستکردنی مزایدە</h2>
+
+    <input id="auctionName"
+           placeholder="ناوی کاڵا">
+
+    <textarea id="auctionDescription"
+              placeholder="وەسفی کاڵا">
+    </textarea>
+
+    <input id="auctionProvince"
+           placeholder="پارێزگا">
+
+    <input id="auctionStartPrice"
+           type="number"
+           placeholder="نرخی دەستپێک">
+
+    <label>کاتی دەستپێکردن</label>
+    <input id="auctionStart"
+           type="datetime-local">
+
+    <label>کاتی کۆتایی</label>
+    <input id="auctionEnd"
+           type="datetime-local">
+
+    <input id="auctionImage"
+           placeholder="لینکی وێنە">
+
+    <button class="submit"
+            onclick="addAuction()">
+      دروستکردنی مزایدە
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- LIVE MODAL -->
+
+<div id="liveModal"
+     class="modal">
+
+  <div class="modalBox">
+
+    <button class="close"
+            onclick="closeModal('liveModal')">
+      ×
+    </button>
+
+    <h2>🔴 دروستکردنی Live</h2>
+
+    <input id="liveTitle"
+           placeholder="ناوی Live">
+
+    <input id="liveDescription"
+           placeholder="وەسف">
+
+    <input id="liveUrl"
+           placeholder="لینکی Live">
+
+    <button class="submit"
+            onclick="addLive()">
+      دەستپێکردنی Live
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ADMIN MODAL -->
+
+<div id="adminModal"
+     class="modal">
+
+  <div class="modalBox">
+
+    <button class="close"
+            onclick="closeModal('adminModal')">
+      ×
+    </button>
+
+    <h2>👨‍💼 زیادکردنی Admin</h2>
+
+    <input id="adminEmail"
+           type="email"
+           placeholder="ئیمەیڵی Admin">
+
+    <button class="submit"
+            onclick="makeAdmin()">
+      زیادکردنی Admin
+    </button>
+
+  </div>
+
+</div>
+
+
+<script type="module">
 
 import {
   initializeApp
@@ -989,32 +857,31 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut,
-  updateProfile
+  signOut
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
   getFirestore,
   collection,
+  addDoc,
   doc,
   setDoc,
   getDoc,
   getDocs,
-  addDoc,
   updateDoc,
   deleteDoc,
-  onSnapshot,
-  serverTimestamp,
   query,
   orderBy,
-  runTransaction
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
+
+/* FIREBASE */
 
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyDCODGZt3JIvYLGoTevxlAmxNQBPD6AVzU",
+    "AIzaSyDCGZodT3jiVylGoTevxlAmxNQBPD6AVzU",
 
   authDomain:
     "xoshnaw-market-50f7f.firebaseapp.com",
@@ -1033,7 +900,6 @@ const firebaseConfig = {
 
   measurementId:
     "G-0N35LVEY6N"
-
 };
 
 
@@ -1044,17 +910,8 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 
-/* GLOBAL */
-
 let user = null;
-
 let userData = null;
-
-let bids = 0;
-
-let purchases = 0;
-
-let lives = 0;
 
 
 /* SECTION */
@@ -1084,12 +941,22 @@ window.showSection = function(id,btn){
     btn.classList.add("active");
   }
 
-  updateAccount();
+  if(id==="market"){
+    loadProducts();
+  }
+
+  if(id==="auction"){
+    loadAuctions();
+  }
+
+  if(id==="live"){
+    loadLives();
+  }
 
 };
 
 
-/* LOGIN */
+/* MODAL */
 
 window.openLogin = function(){
 
@@ -1104,6 +971,15 @@ window.closeLogin = function(){
 
   document
     .getElementById("authModal")
+    .classList.remove("show");
+
+};
+
+
+window.closeModal = function(id){
+
+  document
+    .getElementById(id)
     .classList.remove("show");
 
 };
@@ -1128,19 +1004,18 @@ window.register = async function(){
   const name =
     document
       .getElementById("nameInput")
-      .value
-      .trim();
+      .value.trim();
 
   const email =
     document
       .getElementById("emailInput")
-      .value
-      .trim();
+      .value.trim();
 
   const password =
     document
       .getElementById("passwordInput")
       .value;
+
 
   if(!name || !email || !password){
 
@@ -1151,14 +1026,6 @@ window.register = async function(){
     return;
   }
 
-  if(password.length < 6){
-
-    showNotice(
-      "وشەی نهێنی دەبێت لانیکەم ٦ پیت بێت."
-    );
-
-    return;
-  }
 
   try{
 
@@ -1169,12 +1036,6 @@ window.register = async function(){
         password
       );
 
-    await updateProfile(
-      result.user,
-      {
-        displayName:name
-      }
-    );
 
     await setDoc(
       doc(db,"users",result.user.uid),
@@ -1186,6 +1047,7 @@ window.register = async function(){
       }
     );
 
+
     closeLogin();
 
     alert(
@@ -1195,7 +1057,7 @@ window.register = async function(){
   }catch(error){
 
     showNotice(
-      firebaseError(error)
+      firebaseError(error.code)
     );
 
   }
@@ -1203,29 +1065,24 @@ window.register = async function(){
 };
 
 
-/* LOGIN MODE */
+/* LOGIN */
 
 window.showLoginMode = function(){
 
   document
     .getElementById("authTitle")
     .innerText =
-      "چوونەژوورەوە";
-
-  document
-    .getElementById("nameInput")
-    .style.display =
-      "none";
+    "چوونەژوورەوە";
 
   document
     .getElementById("authSubmit")
     .innerText =
-      "چوونەژوورەوە";
+    "چوونەژوورەوە";
 
   document
     .getElementById("authSubmit")
     .onclick =
-      window.login;
+    window.login;
 
 };
 
@@ -1235,13 +1092,13 @@ window.login = async function(){
   const email =
     document
       .getElementById("emailInput")
-      .value
-      .trim();
+      .value.trim();
 
   const password =
     document
       .getElementById("passwordInput")
       .value;
+
 
   if(!email || !password){
 
@@ -1251,6 +1108,7 @@ window.login = async function(){
 
     return;
   }
+
 
   try{
 
@@ -1262,56 +1120,15 @@ window.login = async function(){
 
     closeLogin();
 
-    alert(
-      "بە سەرکەوتوویی چوویتە ژوورەوە ✅"
-    );
-
   }catch(error){
 
     showNotice(
-      firebaseError(error)
+      firebaseError(error.code)
     );
 
   }
 
 };
-
-
-/* RETURN REGISTER MODE */
-
-document
-  .getElementById("authSwitchText")
-  .parentElement
-  .querySelector("button")
-  .addEventListener(
-    "click",
-    window.showLoginMode
-  );
-
-
-function firebaseError(error){
-
-  const code =
-    error.code || "";
-
-  if(code.includes("email-already-in-use")){
-    return "ئەم ئیمەیڵە پێشتر بەکارهاتووە.";
-  }
-
-  if(code.includes("invalid-credential")){
-    return "ئیمەیڵ یان وشەی نهێنی هەڵەیە.";
-  }
-
-  if(code.includes("invalid-email")){
-    return "ئیمەیڵەکە دروست نییە.";
-  }
-
-  if(code.includes("weak-password")){
-    return "وشەی نهێنی زۆر لاوازە.";
-  }
-
-  return "هەڵەیەک ڕوویدا، تکایە دووبارە هەوڵ بدەرەوە.";
-}
 
 
 /* LOGOUT */
@@ -1323,7 +1140,7 @@ window.logout = async function(){
 };
 
 
-/* USER */
+/* AUTH STATE */
 
 onAuthStateChanged(
   auth,
@@ -1331,32 +1148,13 @@ onAuthStateChanged(
 
     user = currentUser;
 
-    userData = null;
-
     if(user){
 
-      const snap =
-        await getDoc(
-          doc(db,"users",user.uid)
-        );
+      await loadUserData();
 
-      if(snap.exists()){
+    }else{
 
-        userData = snap.data();
-
-      }else{
-
-        userData = {
-          name:
-            user.displayName ||
-            user.email.split("@")[0],
-
-          email:user.email,
-
-          role:"user"
-        };
-
-      }
+      userData = null;
 
     }
 
@@ -1368,35 +1166,53 @@ onAuthStateChanged(
 
     loadLives();
 
-    if(userData &&
-       (
-         userData.role === "admin" ||
-         userData.role === "superAdmin"
-       )){
-
-      document
-        .getElementById("adminNav")
-        .classList.remove("hidden");
-
-      document
-        .getElementById("adminWelcome")
-        .innerText =
-          "بەخێربێیت " +
-          userData.name;
-
-      loadAdminData();
-
-    }else{
-
-      document
-        .getElementById("adminNav")
-        .classList.add("hidden");
-
-    }
-
   }
 );
 
+
+/* USER DATA */
+
+async function loadUserData(){
+
+  if(!user){
+    return;
+  }
+
+
+  const ref =
+    doc(
+      db,
+      "users",
+      user.uid
+    );
+
+
+  const snap =
+    await getDoc(ref);
+
+
+  if(snap.exists()){
+
+    userData = snap.data();
+
+  }else{
+
+    userData = {
+      name:
+        user.email.split("@")[0],
+
+      email:
+        user.email,
+
+      role:"user"
+    };
+
+  }
+
+}
+
+
+/* UPDATE USER */
 
 function updateUser(){
 
@@ -1409,12 +1225,12 @@ function updateUser(){
   const logoutBtn =
     document.getElementById("logoutButton");
 
+
   if(user){
 
     name.innerText =
       userData?.name ||
-      user.displayName ||
-      user.email.split("@")[0];
+      user.email;
 
     loginBtn.style.display =
       "none";
@@ -1435,10 +1251,15 @@ function updateUser(){
 
   }
 
+
   updateAccount();
+
+  updateAdminMenu();
 
 }
 
+
+/* ACCOUNT */
 
 function updateAccount(){
 
@@ -1447,6 +1268,7 @@ function updateAccount(){
 
   const account =
     document.getElementById("accountUser");
+
 
   if(!user){
 
@@ -1460,195 +1282,310 @@ function updateAccount(){
 
   }
 
+
   guest.style.display =
     "none";
 
   account.style.display =
     "block";
 
+
   document
     .getElementById("accountName")
     .innerText =
-      userData?.name || user.displayName || "";
+    userData?.name ||
+    user.email;
+
 
   document
     .getElementById("accountEmail")
     .innerText =
-      user.email || "";
+    user.email;
+
 
   document
     .getElementById("accountRole")
     .innerText =
-      "ڕۆڵ: " +
-      (userData?.role || "user");
-
-  document
-    .getElementById("bidCount")
-    .innerText =
-      bids;
-
-  document
-    .getElementById("purchaseCount")
-    .innerText =
-      purchases;
-
-  document
-    .getElementById("liveCount")
-    .innerText =
-      lives;
+    "ڕۆڵ: " +
+    (userData?.role || "user");
 
 }
 
 
-/* PRODUCTS */
+/* ADMIN MENU */
 
-function loadProducts(){
+function updateAdminMenu(){
 
-  const q =
-    query(
-      collection(db,"products"),
-      orderBy("createdAt","desc")
+  const nav =
+    document.getElementById("adminNav");
+
+  const tools =
+    document.getElementById("superAdminTools");
+
+  const text =
+    document.getElementById("adminRoleText");
+
+
+  const role =
+    userData?.role;
+
+
+  if(role==="admin" ||
+     role==="superAdmin"){
+
+    nav.classList.remove("hidden");
+
+    text.innerText =
+      role==="superAdmin"
+      ? "👑 تۆ Super Admin ـیت."
+      : "👨‍💼 تۆ Admin ـیت.";
+
+  }else{
+
+    nav.classList.add("hidden");
+
+    text.innerText =
+      "";
+
+  }
+
+
+  if(role==="superAdmin"){
+
+    tools.classList.remove("hidden");
+
+  }else{
+
+    tools.classList.add("hidden");
+
+  }
+
+}
+
+
+/* PRODUCT */
+
+window.openProductModal = function(){
+
+  if(!isAdmin()){
+
+    alert(
+      "تەنها Admin و Super Admin دەتوانن کاڵا زیاد بکەن."
     );
 
-  onSnapshot(
-    q,
-    snapshot => {
+    return;
 
-      const market =
-        document.getElementById(
-          "marketProducts"
-        );
+  }
 
-      const home =
-        document.getElementById(
-          "homeProducts"
-        );
+  document
+    .getElementById("productModal")
+    .classList.add("show");
 
-      market.innerHTML = "";
+};
 
-      home.innerHTML = "";
 
-      if(snapshot.empty){
+window.addProduct = async function(){
 
-        document
-          .getElementById("marketEmpty")
-          .style.display =
-            "block";
+  if(!isAdmin()) return;
 
-        document
-          .getElementById("homeEmpty")
-          .style.display =
-            "block";
 
-        return;
+  const name =
+    document
+      .getElementById("productName")
+      .value.trim();
 
-      }
+  const description =
+    document
+      .getElementById("productDescription")
+      .value.trim();
 
+  const condition =
+    document
+      .getElementById("productCondition")
+      .value;
+
+  const province =
+    document
+      .getElementById("productProvince")
+      .value.trim();
+
+  const price =
+    Number(
       document
-        .getElementById("marketEmpty")
-        .style.display =
-          "none";
-
-      document
-        .getElementById("homeEmpty")
-        .style.display =
-          "none";
-
-      let count = 0;
-
-      snapshot.forEach(item=>{
-
-        const data =
-          item.data();
-
-        const html =
-          productCard(
-            item.id,
-            data
-          );
-
-        market.insertAdjacentHTML(
-          "beforeend",
-          html
-        );
-
-        if(count < 3){
-
-          home.insertAdjacentHTML(
-            "beforeend",
-            html
-          );
-
-        }
-
-        count++;
-
-      });
-
-    }
-  );
-
-}
-
-
-function productCard(id,data){
+        .getElementById("productPrice")
+        .value
+    );
 
   const image =
-    data.imageUrl
-      ? `<img src="${escapeHtml(data.imageUrl)}" alt="">`
-      : `<div class="noImage">📦</div>`;
+    document
+      .getElementById("productImage")
+      .value.trim();
 
-  return `
 
-    <div class="card">
+  if(!name ||
+     !description ||
+     !province ||
+     !price){
 
-      <div class="productImg">
-        ${image}
-      </div>
+    alert(
+      "تکایە هەموو زانیارییەکان پڕ بکەرەوە."
+    );
 
-      <div class="cardBody">
+    return;
 
-        <h3>
-          ${escapeHtml(data.name || "")}
-        </h3>
+  }
 
-        <p>
-          ${escapeHtml(data.description || "")}
-        </p>
 
-        <p style="margin-top:6px;color:#6b7280">
-          ${escapeHtml(data.condition || "")}
-          -
-          ${escapeHtml(data.province || "")}
-        </p>
+  try{
 
-        <div class="price">
-          $${Number(data.price || 0).toLocaleString()}
+    await addDoc(
+      collection(db,"products"),
+      {
+        name,
+        description,
+        condition,
+        province,
+        price,
+        image,
+        sellerUid:user.uid,
+        createdAt:serverTimestamp()
+      }
+    );
+
+
+    closeModal("productModal");
+
+    alert(
+      "کاڵاکە بە سەرکەوتوویی زیاد کرا ✅"
+    );
+
+    loadProducts();
+
+  }catch(error){
+
+    alert(
+      "هەڵە: " +
+      error.message
+    );
+
+  }
+
+};
+
+
+/* LOAD PRODUCTS */
+
+async function loadProducts(){
+
+  const grid =
+    document.getElementById("marketGrid");
+
+  const empty =
+    document.getElementById("marketEmpty");
+
+
+  grid.innerHTML =
+    "<div class='empty'>بارکردن...</div>";
+
+
+  try{
+
+    const snap =
+      await getDocs(
+        collection(db,"products")
+      );
+
+
+    grid.innerHTML = "";
+
+
+    if(snap.empty){
+
+      empty.style.display =
+        "block";
+
+      return;
+
+    }
+
+
+    empty.style.display =
+      "none";
+
+
+    snap.forEach(item=>{
+
+      const p =
+        item.data();
+
+
+      grid.innerHTML += `
+
+        <div class="card">
+
+          <div class="productImg">
+            ${
+              p.image
+              ? `<img src="${escapeHtml(p.image)}"
+                   style="width:100%;height:100%;object-fit:cover">`
+              : "📦"
+            }
+          </div>
+
+          <div class="cardBody">
+
+            <h3>
+              ${escapeHtml(p.name)}
+            </h3>
+
+            <p>
+              ${escapeHtml(p.description || "")}
+            </p>
+
+            <p style="margin-top:6px">
+              جۆر: ${escapeHtml(p.condition || "")}
+            </p>
+
+            <p style="margin-top:6px">
+              پارێزگا: ${escapeHtml(p.province || "")}
+            </p>
+
+            <div class="price">
+              $${Number(p.price || 0).toLocaleString()}
+            </div>
+
+            <button class="bidBtn"
+                    onclick="buyProduct('${item.id}')">
+              کڕین
+            </button>
+
+          </div>
+
         </div>
 
-        <button
-          class="buyBtn"
-          onclick="buyProduct('${id}')">
-          کڕین
-        </button>
+      `;
 
-      </div>
+    });
 
-    </div>
 
-  `;
+  }catch(error){
+
+    grid.innerHTML =
+      "<div class='empty'>هەڵە لە بارکردنی کاڵاکان.</div>";
+
+  }
 
 }
 
 
-/* PURCHASE */
+/* BUY */
 
-window.buyProduct = async function(id){
+window.buyProduct = async function(productId){
 
   if(!user){
 
     alert(
-      "بۆ کڕین پێویستە هەژمار هەبێت."
+      "بۆ کڕین سەرەتا هەژمار دروست بکە."
     );
 
     openLogin();
@@ -1657,26 +1594,22 @@ window.buyProduct = async function(id){
 
   }
 
+
   try{
 
-    const ref =
-      await addDoc(
-        collection(db,"orders"),
-        {
-          productId:id,
-          buyerUid:user.uid,
-          buyerEmail:user.email,
-          status:"pending",
-          createdAt:serverTimestamp()
-        }
-      );
+    await addDoc(
+      collection(db,"orders"),
+      {
+        productId,
+        buyerUid:user.uid,
+        buyerEmail:user.email,
+        createdAt:serverTimestamp()
+      }
+    );
 
-    purchases++;
-
-    updateAccount();
 
     alert(
-      "داواکاری کڕینەکەت تۆمار کرا ✅"
+      "داواکاری کڕین تۆمار کرا ✅"
     );
 
   }catch(error){
@@ -1690,128 +1623,231 @@ window.buyProduct = async function(id){
 };
 
 
-/* AUCTIONS */
+/* AUCTION */
 
-function loadAuctions(){
+window.openAuctionModal = function(){
 
-  const q =
-    query(
-      collection(db,"auctions"),
-      orderBy("createdAt","desc")
+  if(!isAdmin()){
+
+    alert(
+      "تەنها Admin و Super Admin دەتوانن مزایدە دروست بکەن."
     );
 
-  onSnapshot(
-    q,
-    snapshot => {
+    return;
 
-      const box =
-        document.getElementById(
-          "auctionList"
-        );
+  }
 
-      box.innerHTML = "";
+  document
+    .getElementById("auctionModal")
+    .classList.add("show");
 
-      if(snapshot.empty){
+};
 
-        document
-          .getElementById("auctionEmpty")
-          .style.display =
-            "block";
 
-        return;
+window.addAuction = async function(){
 
-      }
+  if(!isAdmin()) return;
 
+
+  const name =
+    document
+      .getElementById("auctionName")
+      .value.trim();
+
+  const description =
+    document
+      .getElementById("auctionDescription")
+      .value.trim();
+
+  const province =
+    document
+      .getElementById("auctionProvince")
+      .value.trim();
+
+  const startPrice =
+    Number(
       document
-        .getElementById("auctionEmpty")
-        .style.display =
-          "none";
+        .getElementById("auctionStartPrice")
+        .value
+    );
 
-      snapshot.forEach(item=>{
+  const start =
+    document
+      .getElementById("auctionStart")
+      .value;
 
-        const data =
-          item.data();
+  const end =
+    document
+      .getElementById("auctionEnd")
+      .value;
 
-        const image =
-          data.imageUrl
-            ? `<img src="${escapeHtml(data.imageUrl)}">`
-            : `<div class="noImage">🔨</div>`;
+  const image =
+    document
+      .getElementById("auctionImage")
+      .value.trim();
 
-        const current =
-          data.currentBid ||
-          data.startingPrice ||
-          0;
 
-        box.insertAdjacentHTML(
-          "beforeend",
-          `
+  if(!name ||
+     !description ||
+     !startPrice ||
+     !start ||
+     !end){
 
-          <div class="card">
+    alert(
+      "تکایە هەموو خانەکان پڕ بکەرەوە."
+    );
 
-            <div class="productImg">
-              ${image}
+    return;
+
+  }
+
+
+  await addDoc(
+    collection(db,"auctions"),
+    {
+      name,
+      description,
+      province,
+      startPrice,
+      currentBid:startPrice,
+      currentBidderUid:"",
+      start,
+      end,
+      image,
+      status:"open",
+      createdBy:user.uid,
+      createdAt:serverTimestamp()
+    }
+  );
+
+
+  closeModal("auctionModal");
+
+  alert(
+    "مزایدەکە دروست کرا ✅"
+  );
+
+  loadAuctions();
+
+};
+
+
+/* LOAD AUCTIONS */
+
+async function loadAuctions(){
+
+  const grid =
+    document.getElementById("auctionGrid");
+
+  const empty =
+    document.getElementById("auctionEmpty");
+
+
+  grid.innerHTML =
+    "<div class='empty'>بارکردن...</div>";
+
+
+  try{
+
+    const snap =
+      await getDocs(
+        collection(db,"auctions")
+      );
+
+
+    grid.innerHTML = "";
+
+
+    if(snap.empty){
+
+      empty.style.display =
+        "block";
+
+      return;
+
+    }
+
+
+    empty.style.display =
+      "none";
+
+
+    snap.forEach(item=>{
+
+      const a =
+        item.data();
+
+
+      grid.innerHTML += `
+
+        <div class="card">
+
+          <div class="productImg">
+            ${
+              a.image
+              ? `<img src="${escapeHtml(a.image)}"
+                   style="width:100%;height:100%;object-fit:cover">`
+              : "🔨"
+            }
+          </div>
+
+          <div class="cardBody">
+
+            <h3>
+              ${escapeHtml(a.name)}
+            </h3>
+
+            <p>
+              ${escapeHtml(a.description || "")}
+            </p>
+
+            <p style="margin-top:7px">
+              پارێزگا:
+              ${escapeHtml(a.province || "")}
+            </p>
+
+            <p style="margin-top:7px">
+              دەستپێک:
+              $${Number(a.startPrice || 0).toLocaleString()}
+            </p>
+
+            <div class="price">
+              Bid:
+              $${Number(a.currentBid || a.startPrice || 0).toLocaleString()}
             </div>
 
-            <div class="cardBody">
-
-              <h3>
-                ${escapeHtml(data.name || "")}
-              </h3>
-
-              <p>
-                ${escapeHtml(data.description || "")}
-              </p>
-
-              <p style="margin-top:6px;color:#6b7280">
-                ${escapeHtml(data.condition || "")}
-                -
-                ${escapeHtml(data.province || "")}
-              </p>
-
-              <p style="margin-top:8px">
-                دەستپێک:
-                $${Number(data.startingPrice || 0).toLocaleString()}
-              </p>
-
-              <div class="price">
-                Bid:
-                $${Number(current).toLocaleString()}
-              </div>
-
-              <p style="font-size:13px;color:#6b7280">
-                کۆتایی:
-                ${data.endTime ? new Date(data.endTime).toLocaleString() : ""}
-              </p>
-
-              <button
-                class="bidBtn"
-                onclick="placeBid('${item.id}')">
-                🔨 Bid ـی نوێ
-              </button>
-
-            </div>
+            <button class="bidBtn"
+                    onclick="placeBid('${item.id}')">
+              🔨 Bid ـی نوێ
+            </button>
 
           </div>
 
-          `
-        );
+        </div>
 
-      });
+      `;
 
-    }
-  );
+    });
+
+
+  }catch(error){
+
+    grid.innerHTML =
+      "<div class='empty'>هەڵە لە بارکردنی مزایدەکان.</div>";
+
+  }
 
 }
 
 
 /* BID */
 
-window.placeBid = async function(id){
+window.placeBid = async function(auctionId){
 
   if(!user){
 
     alert(
-      "تکایە سەرەتا هەژمار دروست بکە یان بچۆ ژوورەوە."
+      "بۆ Bid کردن پێویستە هەژمار هەبێت."
     );
 
     openLogin();
@@ -1820,22 +1856,24 @@ window.placeBid = async function(id){
 
   }
 
-  const ref =
-    doc(db,"auctions",id);
 
-  const amountText =
+  const amount =
     prompt(
-      "چەند دەتەوێت Bid بکەیت؟"
+      "نرخی Bid ـەکەت بنووسە:"
     );
 
-  if(amountText === null){
+
+  if(!amount){
     return;
   }
 
-  const amount =
-    Number(amountText);
 
-  if(!amount || amount <= 0){
+  const bid =
+    Number(amount);
+
+
+  if(!Number.isFinite(bid) ||
+     bid<=0){
 
     alert(
       "نرخی Bid دروست نییە."
@@ -1845,81 +1883,93 @@ window.placeBid = async function(id){
 
   }
 
+
   try{
 
-    await runTransaction(
-      db,
-      async transaction => {
+    const ref =
+      doc(
+        db,
+        "auctions",
+        auctionId
+      );
 
-        const snap =
-          await transaction.get(ref);
 
-        if(!snap.exists()){
+    const snap =
+      await getDoc(ref);
 
-          throw new Error(
-            "ئەم مزایدەیە نەماوە."
-          );
 
-        }
+    if(!snap.exists()){
 
-        const data =
-          snap.data();
+      alert(
+        "مزایدەکە نەدۆزرایەوە."
+      );
 
-        const current =
-          Number(
-            data.currentBid ||
-            data.startingPrice ||
-            0
-          );
+      return;
 
-        if(amount <= current){
+    }
 
-          throw new Error(
-            "Bid ـەکەت دەبێت لە نرخی ئێستا زیاتر بێت."
-          );
 
-        }
+    const auction =
+      snap.data();
 
-        transaction.update(
-          ref,
-          {
-            currentBid:amount,
-            currentBidderUid:user.uid,
-            updatedAt:serverTimestamp()
-          }
-        );
 
+    const current =
+      Number(
+        auction.currentBid ||
+        auction.startPrice ||
+        0
+      );
+
+
+    if(bid<=current){
+
+      alert(
+        "Bid ـەکەت دەبێت لە نرخی ئێستا زیاتر بێت."
+      );
+
+      return;
+
+    }
+
+
+    await updateDoc(
+      ref,
+      {
+        currentBid:bid,
+        currentBidderUid:user.uid,
+        updatedAt:serverTimestamp()
       }
     );
+
 
     await addDoc(
       collection(
         db,
         "auctions",
-        id,
+        auctionId,
         "bids"
       ),
       {
         uid:user.uid,
         email:user.email,
-        amount:amount,
+        amount:bid,
         createdAt:serverTimestamp()
       }
     );
 
-    bids++;
-
-    updateAccount();
 
     alert(
-      "Bid ـەکەت بە سەرکەوتوویی تۆمار کرا ✅"
+      "Bid ـەکەت تۆمار کرا ✅"
     );
+
+
+    loadAuctions();
 
   }catch(error){
 
     alert(
-      error.message ||
-      "هەڵە لە Bid."
+      "هەڵە لە Bid: " +
+      error.message
     );
 
   }
@@ -1929,139 +1979,197 @@ window.placeBid = async function(id){
 
 /* LIVE */
 
-function loadLives(){
+window.openLiveModal = function(){
 
-  const q =
-    query(
-      collection(db,"lives"),
-      orderBy("createdAt","desc")
-    );
-
-  onSnapshot(
-    q,
-    snapshot => {
-
-      const box =
-        document.getElementById(
-          "liveList"
-        );
-
-      box.innerHTML = "";
-
-      if(snapshot.empty){
-
-        document
-          .getElementById("liveEmpty")
-          .style.display =
-            "block";
-
-        return;
-
-      }
-
-      document
-        .getElementById("liveEmpty")
-        .style.display =
-          "none";
-
-      snapshot.forEach(item=>{
-
-        const data =
-          item.data();
-
-        const url =
-          data.url || "";
-
-        box.insertAdjacentHTML(
-          "beforeend",
-          `
-
-          <div class="card liveCard">
-
-            <div class="liveScreen">
-
-              📹
-
-              <span class="liveBadge">
-                LIVE
-              </span>
-
-            </div>
-
-            <div class="liveBody">
-
-              <h2>
-                ${escapeHtml(data.title || "XOSHNAW LIVE")}
-              </h2>
-
-              <p style="margin:10px 0;color:#d1d5db">
-                ${escapeHtml(data.description || "")}
-              </p>
-
-              <button
-                class="watchBtn"
-                onclick="openLiveLink('${escapeHtml(url)}')">
-                👁️ بینینی Live
-              </button>
-
-              <button
-                class="watchBtn"
-                style="margin-top:8px;background:#2563eb"
-                onclick="joinLive('${item.id}')">
-                👁️ بەشداری Live
-              </button>
-
-            </div>
-
-          </div>
-
-          `
-        );
-
-      });
-
-    }
-  );
-
-}
-
-
-window.openLiveLink = function(url){
-
-  if(!url){
+  if(!isAdmin()){
 
     alert(
-      "لینکی Live دانەنراوە."
+      "تەنها Admin و Super Admin دەتوانن Live دروست بکەن."
     );
 
     return;
 
   }
 
-  window.open(
-    url,
-    "_blank"
-  );
+  document
+    .getElementById("liveModal")
+    .classList.add("show");
 
 };
 
 
-window.openLive = function(){
+window.addLive = async function(){
 
-  showSection(
-    "live",
-    document.querySelectorAll(".nav button")[2]
+  if(!isAdmin()) return;
+
+
+  const title =
+    document
+      .getElementById("liveTitle")
+      .value.trim();
+
+  const description =
+    document
+      .getElementById("liveDescription")
+      .value.trim();
+
+  const url =
+    document
+      .getElementById("liveUrl")
+      .value.trim();
+
+
+  if(!title){
+
+    alert(
+      "ناوی Live بنووسە."
+    );
+
+    return;
+
+  }
+
+
+  await addDoc(
+    collection(db,"lives"),
+    {
+      title,
+      description,
+      url,
+      viewers:0,
+      status:"live",
+      createdBy:user.uid,
+      createdAt:serverTimestamp()
+    }
   );
+
+
+  closeModal("liveModal");
+
+  alert(
+    "Live دروست کرا ✅"
+  );
+
+  loadLives();
 
 };
 
 
-window.joinLive = async function(id){
+/* LOAD LIVE */
+
+async function loadLives(){
+
+  const grid =
+    document.getElementById("liveGrid");
+
+  const empty =
+    document.getElementById("liveEmpty");
+
+
+  grid.innerHTML =
+    "<div class='empty'>بارکردن...</div>";
+
+
+  try{
+
+    const snap =
+      await getDocs(
+        collection(db,"lives")
+      );
+
+
+    grid.innerHTML = "";
+
+
+    let count = 0;
+
+
+    snap.forEach(item=>{
+
+      const l =
+        item.data();
+
+
+      if(l.status!=="live"){
+        return;
+      }
+
+
+      count++;
+
+
+      grid.innerHTML += `
+
+        <div class="card liveCard">
+
+          <div class="liveScreen">
+
+            📹
+
+            <span class="liveBadge">
+              LIVE NOW
+            </span>
+
+            <span class="viewers">
+              👁️ ${Number(l.viewers || 0)}
+            </span>
+
+          </div>
+
+          <div class="liveBody">
+
+            <h2>
+              ${escapeHtml(l.title)}
+            </h2>
+
+            <p style="margin:10px 0;color:#d1d5db">
+              ${escapeHtml(l.description || "")}
+            </p>
+
+            <button class="watchBtn"
+                    onclick="joinLive('${item.id}')">
+              👁️ بەشداری Live
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+
+    if(count===0){
+
+      empty.style.display =
+        "block";
+
+    }else{
+
+      empty.style.display =
+        "none";
+
+    }
+
+  }catch(error){
+
+    grid.innerHTML =
+      "<div class='empty'>هەڵە لە بارکردنی Live.</div>";
+
+  }
+
+}
+
+
+/* JOIN LIVE */
+
+window.joinLive = async function(liveId){
 
   if(!user){
 
     alert(
-      "بۆ بەشداری Live تکایە هەژمار دروست بکە."
+      "بۆ بەشداری Live هەژمار دروست بکە."
     );
 
     openLogin();
@@ -2070,29 +2178,26 @@ window.joinLive = async function(id){
 
   }
 
+
   try{
 
     await setDoc(
       doc(
         db,
         "lives",
-        id,
+        liveId,
         "viewers",
         user.uid
       ),
       {
         uid:user.uid,
-        email:user.email,
         joinedAt:serverTimestamp()
       }
     );
 
-    lives++;
-
-    updateAccount();
 
     alert(
-      "چوویتە ناو Live ✅"
+      "بەشداری Live ـت تۆمار کرا ✅"
     );
 
   }catch(error){
@@ -2106,905 +2211,370 @@ window.joinLive = async function(id){
 };
 
 
-/* ADMIN CHECK */
+/* ADMIN */
 
 function isAdmin(){
 
   return userData &&
     (
-      userData.role === "admin" ||
-      userData.role === "superAdmin"
+      userData.role==="admin" ||
+      userData.role==="superAdmin"
     );
 
 }
 
-function isSuperAdmin(){
 
-  return userData &&
-    userData.role === "superAdmin";
+/* ADD ADMIN */
 
-}
+window.openAdminModal = function(){
 
-
-/* SAVE PRODUCT */
-
-window.saveProduct = async function(){
-
-  if(!isAdmin()){
+  if(!isSuperAdmin()){
 
     alert(
-      "تەنها Admin دەتوانێت ئەمە بکات."
+      "تەنها Super Admin دەتوانێت Admin زیاد بکات."
     );
 
     return;
 
   }
 
-  const id =
-    document.getElementById(
-      "productId"
-    ).value;
-
-  const data = {
-
-    name:
-      document.getElementById(
-        "productName"
-      ).value.trim(),
-
-    description:
-      document.getElementById(
-        "productDescription"
-      ).value.trim(),
-
-    condition:
-      document.getElementById(
-        "productCondition"
-      ).value,
-
-    province:
-      document.getElementById(
-        "productProvince"
-      ).value.trim(),
-
-    price:
-      Number(
-        document.getElementById(
-          "productPrice"
-        ).value
-      ),
-
-    imageUrl:
-      document.getElementById(
-        "productImage"
-      ).value.trim(),
-
-    updatedAt:
-      serverTimestamp()
-
-  };
-
-  if(!data.name || !data.price){
-
-    alert(
-      "ناو و نرخ پڕ بکەرەوە."
-    );
-
-    return;
-
-  }
-
-  try{
-
-    if(id){
-
-      await updateDoc(
-        doc(db,"products",id),
-        data
-      );
-
-    }else{
-
-      data.createdAt =
-        serverTimestamp();
-
-      data.createdBy =
-        user.uid;
-
-      await addDoc(
-        collection(db,"products"),
-        data
-      );
-
-    }
-
-    clearProductForm();
-
-    alert(
-      "بەرهەم بە سەرکەوتوویی پاشەکەوت کرا ✅"
-    );
-
-  }catch(error){
-
-    alert(
-      "هەڵە لە زیادکردنی بەرهەم."
-    );
-
-  }
+  document
+    .getElementById("adminModal")
+    .classList.add("show");
 
 };
 
 
-function clearProductForm(){
-
-  document.getElementById(
-    "productId"
-  ).value = "";
-
-  document.getElementById(
-    "productName"
-  ).value = "";
-
-  document.getElementById(
-    "productDescription"
-  ).value = "";
-
-  document.getElementById(
-    "productProvince"
-  ).value = "";
-
-  document.getElementById(
-    "productPrice"
-  ).value = "";
-
-  document.getElementById(
-    "productImage"
-  ).value = "";
-
-}
-
-
-/* EDIT PRODUCT */
-
-window.editProduct = function(id,data){
-
-  document.getElementById(
-    "productId"
-  ).value = id;
-
-  document.getElementById(
-    "productName"
-  ).value = data.name || "";
-
-  document.getElementById(
-    "productDescription"
-  ).value = data.description || "";
-
-  document.getElementById(
-    "productCondition"
-  ).value = data.condition || "نوێ";
-
-  document.getElementById(
-    "productProvince"
-  ).value = data.province || "";
-
-  document.getElementById(
-    "productPrice"
-  ).value = data.price || "";
-
-  document.getElementById(
-    "productImage"
-  ).value = data.imageUrl || "";
-
-  alert(
-    "ئێستا دەتوانیت بەرهەمەکە دەستکاری بکەیت و پاشەکەوتی بکەیت."
-  );
-
-};
-
-
-/* DELETE PRODUCT */
-
-window.deleteProduct = async function(id){
-
-  if(!isAdmin()) return;
-
-  if(!confirm(
-    "دڵنیایت لە سڕینەوەی ئەم بەرهەمە؟"
-  )) return;
-
-  await deleteDoc(
-    doc(db,"products",id)
-  );
-
-};
-
-
-/* SAVE AUCTION */
-
-window.saveAuction = async function(){
-
-  if(!isAdmin()){
-
-    alert(
-      "تەنها Admin دەتوانێت مزایدە دروست بکات."
-    );
-
-    return;
-
-  }
-
-  const id =
-    document.getElementById(
-      "auctionId"
-    ).value;
-
-  const data = {
-
-    name:
-      document.getElementById(
-        "auctionName"
-      ).value.trim(),
-
-    description:
-      document.getElementById(
-        "auctionDescription"
-      ).value.trim(),
-
-    condition:
-      document.getElementById(
-        "auctionCondition"
-      ).value,
-
-    province:
-      document.getElementById(
-        "auctionProvince"
-      ).value.trim(),
-
-    imageUrl:
-      document.getElementById(
-        "auctionImage"
-      ).value.trim(),
-
-    startingPrice:
-      Number(
-        document.getElementById(
-          "auctionStartingPrice"
-        ).value
-      ),
-
-    startTime:
-      document.getElementById(
-        "auctionStart"
-      ).value,
-
-    endTime:
-      document.getElementById(
-        "auctionEnd"
-      ).value,
-
-    updatedAt:
-      serverTimestamp()
-
-  };
-
-  if(
-    !data.name ||
-    !data.startingPrice ||
-    !data.startTime ||
-    !data.endTime
-  ){
-
-    alert(
-      "ناو، نرخی دەستپێک و کاتەکان پڕ بکەرەوە."
-    );
-
-    return;
-
-  }
-
-  try{
-
-    if(id){
-
-      await updateDoc(
-        doc(db,"auctions",id),
-        data
-      );
-
-    }else{
-
-      data.currentBid =
-        data.startingPrice;
-
-      data.createdAt =
-        serverTimestamp();
-
-      data.createdBy =
-        user.uid;
-
-      await addDoc(
-        collection(db,"auctions"),
-        data
-      );
-
-    }
-
-    clearAuctionForm();
-
-    alert(
-      "مزایدە بە سەرکەوتوویی پاشەکەوت کرا ✅"
-    );
-
-  }catch(error){
-
-    alert(
-      "هەڵە لە مزایدە."
-    );
-
-  }
-
-};
-
-
-function clearAuctionForm(){
-
-  [
-    "auctionId",
-    "auctionName",
-    "auctionDescription",
-    "auctionProvince",
-    "auctionImage",
-    "auctionStartingPrice",
-    "auctionStart",
-    "auctionEnd"
-  ].forEach(id=>{
-
-    document.getElementById(id).value="";
-
-  });
-
-}
-
-
-window.editAuction = function(id,data){
-
-  document.getElementById(
-    "auctionId"
-  ).value=id;
-
-  document.getElementById(
-    "auctionName"
-  ).value=data.name || "";
-
-  document.getElementById(
-    "auctionDescription"
-  ).value=data.description || "";
-
-  document.getElementById(
-    "auctionCondition"
-  ).value=data.condition || "نوێ";
-
-  document.getElementById(
-    "auctionProvince"
-  ).value=data.province || "";
-
-  document.getElementById(
-    "auctionImage"
-  ).value=data.imageUrl || "";
-
-  document.getElementById(
-    "auctionStartingPrice"
-  ).value=data.startingPrice || "";
-
-  document.getElementById(
-    "auctionStart"
-  ).value=data.startTime || "";
-
-  document.getElementById(
-    "auctionEnd"
-  ).value=data.endTime || "";
-
-};
-
-
-window.deleteAuction = async function(id){
-
-  if(!isAdmin()) return;
-
-  if(!confirm(
-    "دڵنیایت لە سڕینەوەی ئەم مزایدەیە؟"
-  )) return;
-
-  await deleteDoc(
-    doc(db,"auctions",id)
-  );
-
-};
-
-
-/* SAVE LIVE */
-
-window.saveLive = async function(){
-
-  if(!isAdmin()){
-
-    alert(
-      "تەنها Admin دەتوانێت Live زیاد بکات."
-    );
-
-    return;
-
-  }
-
-  const id =
-    document.getElementById(
-      "liveId"
-    ).value;
-
-  const data = {
-
-    title:
-      document.getElementById(
-        "liveTitle"
-      ).value.trim(),
-
-    description:
-      document.getElementById(
-        "liveDescription"
-      ).value.trim(),
-
-    url:
-      document.getElementById(
-        "liveUrl"
-      ).value.trim(),
-
-    updatedAt:
-      serverTimestamp()
-
-  };
-
-  if(!data.title || !data.url){
-
-    alert(
-      "ناوی Live و لینکی Live پڕ بکەرەوە."
-    );
-
-    return;
-
-  }
-
-  try{
-
-    if(id){
-
-      await updateDoc(
-        doc(db,"lives",id),
-        data
-      );
-
-    }else{
-
-      data.createdAt =
-        serverTimestamp();
-
-      data.createdBy =
-        user.uid;
-
-      await addDoc(
-        collection(db,"lives"),
-        data
-      );
-
-    }
-
-    clearLiveForm();
-
-    alert(
-      "Live بە سەرکەوتوویی پاشەکەوت کرا ✅"
-    );
-
-  }catch(error){
-
-    alert(
-      "هەڵە لە زیادکردنی Live."
-    );
-
-  }
-
-};
-
-
-function clearLiveForm(){
-
-  document.getElementById(
-    "liveId"
-  ).value="";
-
-  document.getElementById(
-    "liveTitle"
-  ).value="";
-
-  document.getElementById(
-    "liveDescription"
-  ).value="";
-
-  document.getElementById(
-    "liveUrl"
-  ).value="";
-
-}
-
-
-window.editLive = function(id,data){
-
-  document.getElementById(
-    "liveId"
-  ).value=id;
-
-  document.getElementById(
-    "liveTitle"
-  ).value=data.title || "";
-
-  document.getElementById(
-    "liveDescription"
-  ).value=data.description || "";
-
-  document.getElementById(
-    "liveUrl"
-  ).value=data.url || "";
-
-};
-
-
-window.deleteLive = async function(id){
-
-  if(!isAdmin()) return;
-
-  if(!confirm(
-    "دڵنیایت لە سڕینەوەی ئەم Live ـە؟"
-  )) return;
-
-  await deleteDoc(
-    doc(db,"lives",id)
-  );
-
-};
-
-
-/* ADMIN DATA */
-
-async function loadAdminData(){
-
-  if(!isAdmin()) return;
-
-  const products =
-    await getDocs(
-      collection(db,"products")
-    );
-
-  const pbox =
-    document.getElementById(
-      "adminProducts"
-    );
-
-  pbox.innerHTML="";
-
-  products.forEach(item=>{
-
-    const data=item.data();
-
-    pbox.insertAdjacentHTML(
-      "beforeend",
-      `
-
-      <div class="adminItem">
-
-        <b>
-          ${escapeHtml(data.name || "")}
-        </b>
-
-        <br>
-
-        $${Number(data.price || 0).toLocaleString()}
-
-        <br>
-
-        <button
-          class="editBtn"
-          onclick='editProduct("${item.id}",${JSON.stringify(data)})'>
-          دەستکاری
-        </button>
-
-        <button
-          class="deleteBtn"
-          onclick="deleteProduct('${item.id}')">
-          سڕینەوە
-        </button>
-
-      </div>
-
-      `
-    );
-
-  });
-
-
-  const auctions =
-    await getDocs(
-      collection(db,"auctions")
-    );
-
-  const abox =
-    document.getElementById(
-      "adminAuctions"
-    );
-
-  abox.innerHTML="";
-
-  auctions.forEach(item=>{
-
-    const data=item.data();
-
-    abox.insertAdjacentHTML(
-      "beforeend",
-      `
-
-      <div class="adminItem">
-
-        <b>
-          ${escapeHtml(data.name || "")}
-        </b>
-
-        <br>
-
-        Bid:
-        $${Number(
-          data.currentBid ||
-          data.startingPrice ||
-          0
-        ).toLocaleString()}
-
-        <br>
-
-        <button
-          class="editBtn"
-          onclick='editAuction("${item.id}",${JSON.stringify(data)})'>
-          دەستکاری
-        </button>
-
-        <button
-          class="deleteBtn"
-          onclick="deleteAuction('${item.id}')">
-          سڕینەوە
-        </button>
-
-      </div>
-
-      `
-    );
-
-  });
-
-
-  const livesSnap =
-    await getDocs(
-      collection(db,"lives")
-    );
-
-  const lbox =
-    document.getElementById(
-      "adminLives"
-    );
-
-  lbox.innerHTML="";
-
-  livesSnap.forEach(item=>{
-
-    const data=item.data();
-
-    lbox.insertAdjacentHTML(
-      "beforeend",
-      `
-
-      <div class="adminItem">
-
-        <b>
-          ${escapeHtml(data.title || "")}
-        </b>
-
-        <br>
-
-        <button
-          class="editBtn"
-          onclick='editLive("${item.id}",${JSON.stringify(data)})'>
-          دەستکاری
-        </button>
-
-        <button
-          class="deleteBtn"
-          onclick="deleteLive('${item.id}')">
-          سڕینەوە
-        </button>
-
-      </div>
-
-      `
-    );
-
-  });
-
-
-  if(isSuperAdmin()){
-
-    document
-      .getElementById("superAdminArea")
-      .classList.remove("hidden");
-
-    loadUsers();
-
-  }else{
-
-    document
-      .getElementById("superAdminArea")
-      .classList.add("hidden");
-
-  }
-
-}
-
-
-/* USERS / SUPER ADMIN */
-
-async function loadUsers(){
+window.makeAdmin = async function(){
 
   if(!isSuperAdmin()) return;
 
-  const snap =
-    await getDocs(
-      collection(db,"users")
+
+  const email =
+    document
+      .getElementById("adminEmail")
+      .value.trim();
+
+
+  if(!email){
+
+    alert(
+      "ئیمەیڵی Admin بنووسە."
     );
+
+    return;
+
+  }
+
+
+  /*
+   * لە ڕێگای Firebase Client ـەوە
+   * ناتوانین بە ئیمەیڵ UID ـی هەژمارێکی تر
+   * بە شێوەی دروست بدۆزینەوە.
+   *
+   * بۆیە Admin دەبێت سەرەتا هەژماری خۆی دروست بکات.
+   * پاشان Super Admin دەتوانێت ڕۆڵەکەی بگۆڕێت
+   * لە Users list.
+   */
+
+  alert(
+    "ئێستا ئەو کەسە دەبێت سەرەتا هەژمار دروست بکات. پاشان لە لیستی Users ڕۆڵەکەی دەگۆڕین."
+  );
+
+  closeModal("adminModal");
+
+};
+
+
+/* USERS */
+
+window.loadUsers = async function(){
+
+  if(!isSuperAdmin()) return;
+
 
   const box =
-    document.getElementById(
-      "adminUsers"
-    );
-
-  box.innerHTML="";
-
-  snap.forEach(item=>{
-
-    const data=item.data();
-
-    const role =
-      data.role || "user";
-
-    const buttons =
-      role === "superAdmin"
-        ? ""
-        : `
-
-          <button
-            class="roleBtn"
-            onclick="makeAdmin('${item.id}')">
-            Admin بکە
-          </button>
-
-          <button
-            class="deleteBtn"
-            onclick="removeAdmin('${item.id}')">
-            لابردنی Admin
-          </button>
-
-        `;
-
-    box.insertAdjacentHTML(
-      "beforeend",
-      `
-
-      <div class="adminItem">
-
-        <b>
-          ${escapeHtml(data.name || "")}
-        </b>
-
-        <br>
-
-        ${escapeHtml(data.email || "")}
-
-        <br>
-
-        ڕۆڵ:
-        <b>
-          ${escapeHtml(role)}
-        </b>
-
-        <br>
-
-        ${buttons}
-
-      </div>
-
-      `
-    );
-
-  });
-
-}
+    document.getElementById("usersList");
 
 
-window.makeAdmin = async function(uid){
+  box.innerHTML =
+    "بارکردن...";
 
-  if(!isSuperAdmin()) return;
 
-  await updateDoc(
-    doc(db,"users",uid),
-    {
-      role:"admin"
-    }
-  );
+  try{
 
-  alert(
-    "بەکارهێنەر بوو بە Admin ✅"
-  );
+    const snap =
+      await getDocs(
+        collection(db,"users")
+      );
 
-  loadUsers();
+
+    box.innerHTML = "";
+
+
+    snap.forEach(item=>{
+
+      const u =
+        item.data();
+
+
+      box.innerHTML += `
+
+        <div style="
+          background:#f3f4f6;
+          padding:12px;
+          border-radius:10px;
+          margin-bottom:8px;
+        ">
+
+          <b>
+            ${escapeHtml(u.name || "")}
+          </b>
+
+          <br>
+
+          ${escapeHtml(u.email || "")}
+
+          <br>
+
+          <strong>
+            ${escapeHtml(u.role || "user")}
+          </strong>
+
+          ${
+            u.role==="admin"
+            ? `
+              <button
+                class="dangerBtn"
+                style="margin-top:8px"
+                onclick="removeAdmin('${item.id}')">
+                لابردنی Admin
+              </button>
+            `
+            : ""
+          }
+
+        </div>
+
+      `;
+
+    });
+
+  }catch(error){
+
+    box.innerHTML =
+      "هەڵە لە بارکردنی Users.";
+
+  }
 
 };
 
+
+/* REMOVE ADMIN */
 
 window.removeAdmin = async function(uid){
 
   if(!isSuperAdmin()) return;
 
-  const snap =
-    await getDoc(
-      doc(db,"users",uid)
-    );
 
-  if(!snap.exists()) return;
-
-  if(
-    snap.data().role ===
-    "superAdmin"
-  ){
-
-    alert(
-      "ناتوانیت Super Admin لاببەیت."
-    );
-
+  if(!confirm(
+    "دڵنیایت دەتەوێت ئەم Admin ـە لاببەیت؟"
+  )){
     return;
-
   }
 
-  await updateDoc(
-    doc(db,"users",uid),
-    {
-      role:"user"
-    }
-  );
 
-  alert(
-    "ڕۆڵی Admin لابرا و بوو بە User ✅"
-  );
+  try{
 
-  loadUsers();
+    await updateDoc(
+      doc(db,"users",uid),
+      {
+        role:"user"
+      }
+    );
+
+
+    alert(
+      "Admin لابرا ✅"
+    );
+
+
+    loadUsers();
+
+  }catch(error){
+
+    alert(
+      "هەڵە لە لابردنی Admin."
+    );
+
+  }
 
 };
 
 
-/* ESCAPE */
+/* SUPER ADMIN */
+
+function isSuperAdmin(){
+
+  return userData &&
+    userData.role==="superAdmin";
+
+}
+
+
+/* ERROR */
+
+function firebaseError(code){
+
+  switch(code){
+
+    case "auth/email-already-in-use":
+      return "ئەم ئیمەیڵە پێشتر بەکارهاتووە.";
+
+    case "auth/invalid-email":
+      return "ئیمەیڵەکە دروست نییە.";
+
+    case "auth/weak-password":
+      return "وشەی نهێنی زۆر لاوازە.";
+
+    case "auth/invalid-credential":
+      return "ئیمەیڵ یان وشەی نهێنی هەڵەیە.";
+
+    default:
+      return "هەڵەیەک ڕوویدا. دووبارە هەوڵ بدەرەوە.";
+
+  }
+
+}
+
+
+/* SECURITY */
 
 function escapeHtml(value){
 
   return String(value || "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
+
+
+/* HOME */
+
+function renderHome(){
+
+  const grid =
+    document.getElementById("homeGrid");
+
+
+  grid.innerHTML = `
+
+    <div class="card">
+
+      <div class="productImg">
+        🛒
+      </div>
+
+      <div class="cardBody">
+
+        <h3>
+          XOSHNAW MARKET
+        </h3>
+
+        <p>
+          کاڵاکان لە بازاڕەکەدا ببینە.
+        </p>
+
+        <button class="bidBtn"
+                onclick="
+                  showSection(
+                    'market',
+                    document.querySelectorAll('.nav button')[1]
+                  )
+                ">
+          چوونە بازاڕ
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="productImg">
+        🔨
+      </div>
+
+      <div class="cardBody">
+
+        <h3>
+          مزایدە
+        </h3>
+
+        <p>
+          بەشداری مزایدە چالاکەکان بکە.
+        </p>
+
+        <button class="bidBtn"
+                onclick="
+                  showSection(
+                    'auction',
+                    document.querySelectorAll('.nav button')[3]
+                  )
+                ">
+          بینینی مزایدە
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="card liveCard">
+
+      <div class="liveScreen">
+        🔴
+        <span class="liveBadge">
+          LIVE
+        </span>
+      </div>
+
+      <div class="liveBody">
+
+        <h3>
+          Live
+        </h3>
+
+        <p style="margin:8px 0;color:#d1d5db">
+          Live ـە چالاکەکان ببینە.
+        </p>
+
+        <button class="watchBtn"
+                onclick="
+                  showSection(
+                    'live',
+                    document.querySelectorAll('.nav button')[2]
+                  )
+                ">
+          بینینی Live
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* START */
+
+renderHome();
 
 </script>
 
