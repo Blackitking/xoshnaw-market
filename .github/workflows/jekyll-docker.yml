@@ -1,17 +1,17 @@
 name: Build XOSHNAW MARKET APK
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get website files
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -25,16 +25,14 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Install Capacitor
-        run: |
-          npm install @capacitor/core @capacitor/cli @capacitor/android --no-audit --no-fund
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
 
-      - name: Prepare website
+      - name: Prepare web assets
         run: |
           rm -rf www
           mkdir www
-          cp -r . www
-          rm -rf www/.git www/.github www/node_modules www/android
+          cp index.html www/index.html
 
       - name: Create Capacitor config
         run: |
@@ -46,10 +44,10 @@ jobs:
           }
           EOF
 
-      - name: Add Android
+      - name: Add Android platform
         run: npx cap add android
 
-      - name: Sync website into APK
+      - name: Sync Capacitor
         run: npx cap sync android
 
       - name: Build APK
