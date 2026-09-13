@@ -28,6 +28,16 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
+      - name: Create Capacitor config
+        run: |
+          cat > capacitor.config.json <<'EOF'
+          {
+            "appId": "com.xoshnaw.market",
+            "appName": "XOSHNAW MARKET",
+            "webDir": "."
+          }
+          EOF
+
       - name: Add Android platform
         run: npx cap add android
 
