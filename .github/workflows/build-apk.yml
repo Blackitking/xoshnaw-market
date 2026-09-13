@@ -28,13 +28,23 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
+      - name: Prepare web files
+        run: |
+          mkdir -p www
+          rsync -a ./ www/ \
+            --exclude='www/' \
+            --exclude='android/' \
+            --exclude='node_modules/' \
+            --exclude='.git/' \
+            --exclude='.github/'
+
       - name: Create Capacitor config
         run: |
           cat > capacitor.config.json <<'EOF'
           {
             "appId": "com.xoshnaw.market",
             "appName": "XOSHNAW MARKET",
-            "webDir": "."
+            "webDir": "www"
           }
           EOF
 
