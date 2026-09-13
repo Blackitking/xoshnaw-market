@@ -28,15 +28,11 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Prepare web files
+      - name: Prepare web assets
         run: |
-          mkdir -p www
+          rm -rf www
+          mkdir www
           cp index.html www/index.html
-          find . -maxdepth 1 -type f ! -name 'index.html' ! -name 'package.json' ! -name 'package-lock.json' -exec cp {} www/ \;
-          if [ -d "css" ]; then cp -r css www/; fi
-          if [ -d "js" ]; then cp -r js www/; fi
-          if [ -d "assets" ]; then cp -r assets www/; fi
-          if [ -d "images" ]; then cp -r images www/; fi
 
       - name: Create Capacitor config
         run: |
