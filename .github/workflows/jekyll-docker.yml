@@ -1,4 +1,4 @@
-name: Jekyll Docker
+name: Build XOSHNAW MARKET APK
 
 on:
   push:
@@ -7,12 +7,57 @@ on:
   workflow_dispatch:
 
 jobs:
-  jekyll:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Get website files
         uses: actions/checkout@v4
 
-      - name: Check
-        run: echo "Jekyll workflow is working"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install Capacitor
+        run: |
+          npm install @capacitor/core @capacitor/cli @capacitor/android --no-audit --no-fund
+
+      - name: Prepare website
+        run: |
+          rm -rf www
+          mkdir www
+          cp -r . www
+          rm -rf www/.git www/.github www/node_modules www/android
+
+      - name: Create Capacitor config
+        run: |
+          cat > capacitor.config.json <<'EOF'
+          {
+            "appId": "com.xoshnaw.market",
+            "appName": "XOSHNAW MARKET",
+            "webDir": "www"
+          }
+          EOF
+
+      - name: Add Android
+        run: npx cap add android
+
+      - name: Sync website into APK
+        run: npx cap sync android
+
+      - name: Build APK
+        working-directory: android
+        run: chmod +x gradlew && ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: XOSHNAW-MARKET-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
